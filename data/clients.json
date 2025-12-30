@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1766984521064",
+    "firstName": "TestClient",
+    "lastName": "",
+    "email": "testclient@example.com",
+    "phone": "",
+    "city": "SampleCity",
+    "address": "",
+    "services": [],
+    "radius": null,
+    "password": "$2a$10$OoPQfSyLVfMZ8A./mFR5cuID5ZZHsVoHY4Yrna5ui3l0E3ir1q/1a"
+  },
+  {
+    "id": "1766988131215",
+    "firstName": "Lock",
+    "lastName": "",
+    "email": "locktest+1766988130946@example.com",
+    "phone": "",
+    "city": "Nowhere",
+    "address": "",
+    "services": [],
+    "radius": null,
+    "password": "$2a$10$ENURBYMSezEPdoxJYxQNseG0qKhUNeA/DF4fFKGcZKUQKlocSG9NS",
+    "failedAttempts": 5,
+    "lockedUntil": 1766989031599
+  },
+  {
+    "id": "1766988189059",
+    "firstName": "Lock",
+    "lastName": "",
+    "email": "locktest+1766988188882@example.com",
+    "phone": "",
+    "city": "Nowhere",
+    "address": "",
+    "services": [],
+    "radius": null,
+    "password": "$2a$10$5ZCT9SUOBzeYzoXZAKBuMuBorvmIAqTYRLRh6Q/Cicyqu2QnvM65u",
+    "failedAttempts": 5,
+    "lockedUntil": 1766989089542
+  },
+  {
+    "id": "1766988256180",
+    "firstName": "Lock",
+    "lastName": "",
+    "email": "locktest+1766988255982@example.com",
+    "phone": "",
+    "city": "Nowhere",
+    "address": "",
+    "services": [],
+    "radius": null,
+    "password": "$2a$10$l0FH41zyWpZ6xVFm.3GabuStOBRHhQoUI.3k86ikGQx.6UcYXQ6SS",
+    "failedAttempts": 5,
+    "lockedUntil": 1766989157007
+  },
+  {
+    "id": "1766988326128",
+    "firstName": "Lock",
+    "lastName": "",
+    "email": "locktest+1766988325913@example.com",
+    "phone": "",
+    "city": "Nowhere",
+    "address": "",
+    "services": [],
+    "radius": null,
+    "password": "$2a$10$rjjUxds0QlBEDZdbAPjQE.L32bjwD6aooOeqHOzxMxCvhOq.XnaWG",
+    "failedAttempts": 5,
+    "lockedUntil": 1766989226946
+  },
+  {
+    "id": "1766988337943",
+    "firstName": "Lock",
+    "lastName": "",
+    "email": "locktest+1766988337746@example.com",
+    "phone": "",
+    "city": "Nowhere",
+    "address": "",
+    "services": [],
+    "radius": null,
+    "password": "$2a$10$L1Fw7D0C.os4REAemJuG/.d6FBOy/0Unrr0hJNBN9HQfue0Kvrdcy",
+    "failedAttempts": 5,
+    "lockedUntil": 1766989238816
+  },
+  {
+    "id": "1767023802307",
+    "firstName": "Rohit",
+    "lastName": "Das",
+    "email": "rohit.das.ds28@heritageit.edu.in",
+    "phone": "08910182154",
+    "city": "calcutta",
+    "address": "75/4,beleghatamainRoad",
+    "services": [
+      "electrical"
+    ],
+    "radius": 5,
+    "password": "$2a$10$t2aQLC7nBvNEZsjYb7WoGOMyKN3ZZLUVYDmeEC4UfQvHetX1EB2Mi",
+    "failedAttempts": 0,
+    "lockedUntil": null,
+    "latitude": 22.55934574747661,
+    "longitude": 88.40471250761887
+  }
+]

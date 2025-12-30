@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1766984532272",
+    "firstName": "TestWorker",
+    "lastName": "",
+    "email": "testworker@example.com",
+    "phone": "",
+    "profession": "electrician",
+    "experience": 0,
+    "skills": "",
+    "certifications": "",
+    "hourlyRate": null,
+    "serviceRadius": null,
+    "password": "work123"
+  },
+  {
+    "id": "1767020751509",
+    "firstName": "Rohit",
+    "lastName": "Das",
+    "email": "rohitdas66580@gmail.com",
+    "phone": "08910182154",
+    "profession": "electrician",
+    "experience": 5,
+    "skills": "electric",
+    "certifications": "www.isc.com",
+    "hourlyRate": 500,
+    "serviceRadius": 5,
+    "latitude": null,
+    "longitude": null,
+    "password": "$2a$10$e6en1k9qx5tVCoBWsUO.bu/J3mF5isieorjLbZqrwgtSBb7AxU8Oi"
+  }
+]
