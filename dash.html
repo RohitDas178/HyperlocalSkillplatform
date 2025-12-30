@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skilloc - Hyperlocal Marketplace</title>
+    <link rel="stylesheet" href="dash.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>SKILLOC</h1>
+            <p>Find Skilled Local Professionals in Your Region</p>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="main-content">
+            <!-- Login Section Container -->
+            <div class="login-container">
+                
+                <!-- Worker Login Section -->
+                <div class="login-section worker-section">
+                    <div class="section-title">
+                        <h2>Login as Worker</h2>
+                        <p>Offer your skills and services</p>
+                    </div>
+                    <form class="login-form">
+                        <div class="form-group">
+                            <label for="worker-email">Email Address</label>
+                            <input type="email" id="worker-email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="worker-password">Password</label>
+                            <input type="password" id="worker-password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="worker-profession">Profession</label>
+                            <select id="worker-profession" name="profession" required>
+                                <option value="">Select your profession</option>
+                                <option value="electrician">Electrician</option>
+                                <option value="plumber">Plumber</option>
+                                <option value="mechanic">Mechanic</option>
+                                <option value="carpenter">Carpenter</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="worker-location">Your Location</label>
+                            <input type="text" id="worker-location" name="location" placeholder="Enter your region/city" required>
+                        </div>
+                        <button type="submit" class="btn-login">Login as Worker</button>
+                    </form>
+                    <p class="signup-link">Don't have an account? <a href="worker.html">Register here</a></p>
+                </div>
+
+                <!-- Client Login Section -->
+                <div class="login-section client-section">
+                    <div class="section-title">
+                        <h2>Login as Client</h2>
+                        <p>Find skilled professionals near you</p>
+                    </div>
+                    <form class="login-form">
+                        <div class="form-group">
+                            <label for="client-email">Email Address</label>
+                            <input type="email" id="client-email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-password">Password</label>
+                            <input type="password" id="client-password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-service">Service Needed</label>
+                            <select id="client-service" name="service" required>
+                                <option value="">Select a service</option>
+                                <option value="electrical">Electrical Work</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="automotive">Automotive Repair</option>
+                                <option value="carpentry">Carpentry</option>
+                                <option value="other">Other Service</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-location">Your Location</label>
+                            <input type="text" id="client-location" name="location" placeholder="Enter your region/city" required>
+                        </div>
+                        <button type="submit" class="btn-login">Login as Client</button>
+                    </form>
+                    <p class="signup-link">Don't have an account? <a href="client.html">Register here</a></p>
+                </div>
+
+            </div>
+
+            <!-- Services Display Section -->
+            <section class="services-section">
+                <h2>Available Services Near You</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>Electricians</h3>
+                        <p>Professional electrical services for residential and commercial needs</p>
+                        <button class="btn-browse" data-category="electrician">Browse</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔧</div>
+                        <h3>Plumbers</h3>
+                        <p>Expert plumbing solutions for all your water and drainage issues</p>
+                        <button class="btn-browse" data-category="plumber">Browse</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔩</div>
+                        <h3>Mechanics</h3>
+                        <p>Skilled automotive mechanics for vehicle repairs and maintenance</p>
+                        <button class="btn-browse" data-category="mechanic">Browse</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🪛</div>
+                        <h3>Carpenters</h3>
+                        <p>Professional carpentry services for construction and furniture work</p>
+                        <button class="btn-browse" data-category="carpenter">Browse</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Skilloc - Hyperlocal Marketplace. All rights reserved.</p>
+        </footer>
+    </div>
+    <!-- Nearby results modal -->
+    <div id="nearbyModal" style="display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#0f1724;color:#e6eef8;padding:20px;border-radius:8px;z-index:2000;max-width:90%;width:420px;box-shadow:0 8px 30px rgba(0,0,0,0.6);">
+        <h3 id="modalTitle">Nearby</h3>
+        <div id="modalBody" style="margin-top:10px;max-height:300px;overflow:auto"></div>
+        <div style="margin-top:12px;text-align:right">
+            <button id="openMapsBtn" style="margin-right:8px;padding:8px 12px;background:#ff2fa6;color:#fff;border:none;border-radius:6px;">Open Google Maps</button>
+            <button id="closeModal" style="padding:8px 12px;background:#444;color:#fff;border:none;border-radius:6px;">Close</button>
+        </div>
+    </div>
+
+    <script>
+    (function(){
+        const thresholdMeters = 5; // maximum distance to consider (in meters)
+
+        function haversineMeters(lat1, lon1, lat2, lon2){
+            const R = 6371000; // meters
+            const toRad = v => v * Math.PI / 180;
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function showModal(title, html, mapsUrl){
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = html;
+            const modal = document.getElementById('nearbyModal');
+            modal.style.display = 'block';
+            const openMapsBtn = document.getElementById('openMapsBtn');
+            openMapsBtn.onclick = () => { if (mapsUrl) window.open(mapsUrl, '_blank'); };
+            document.getElementById('closeModal').onclick = () => { modal.style.display = 'none'; };
+        }
+
+        async function findNearby(category){
+            if (!navigator.geolocation) return alert('Geolocation is not supported by your browser');
+            navigator.geolocation.getCurrentPosition(async (pos)=>{
+                const lat = pos.coords.latitude;
+                const lng = pos.coords.longitude;
+                try{
+                    const res = await fetch('/api/nearby', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ category, lat, lng })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Server error');
+
+                    const workers = data.workers || [];
+                    if (workers.length === 0) {
+                        const mapsSearch = `https://www.google.com/maps/search/${encodeURIComponent(category)}/@${lat},${lng},15z`;
+                        showModal('No nearby workers found', `<p>No registered ${category} found within ${thresholdMeters} meters.</p><p>You can try Google Maps search for nearby ${category} instead.</p>`, mapsSearch);
+                        return;
+                    }
+
+                    // Build result list
+                    const listHtml = workers.map(w=>{
+                        const d = haversineMeters(lat, lng, w.latitude, w.longitude);
+                        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(w.firstName + ' ' + (w.lastName||'') + ' ' + category)}&query_place_id=`;
+                        return `<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.05)"><strong>${w.firstName} ${w.lastName || ''}</strong><div style="font-size:13px;color:#bcd">${(d).toFixed(1)} m away</div><div style="margin-top:6px"><a target="_blank" href="https://www.google.com/maps?q=${w.latitude},${w.longitude}" style="color:#fff;background:#0b8;display:inline-block;padding:6px 8px;border-radius:6px;text-decoration:none">Open on Map</a></div></div>`;
+                    }).join('');
+
+                    const centerMaps = `https://www.google.com/maps/search/${encodeURIComponent(category)}/@${lat},${lng},15z`;
+                    showModal(`${workers.length} result(s) near you`, listHtml, centerMaps);
+                }catch(err){
+                    console.error(err);
+                    alert(err.message || 'Error searching nearby');
+                }
+            }, (err)=>{
+                alert('Unable to retrieve your location: ' + (err.message||err.code));
+            }, { enableHighAccuracy: false, maximumAge: 30000, timeout: 10000 });
+        }
+
+        document.querySelectorAll('.btn-browse').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                const category = btn.getAttribute('data-category') || btn.closest('.service-card')?.querySelector('h3')?.textContent?.toLowerCase() || 'service';
+                findNearby(category);
+            });
+        });
+    })();
+
+    // Login handlers for worker and client
+    (function(){
+        async function doLogin(type, email, password){
+            try{
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, type })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Login failed');
+                // Save token and user
+                if (data.token) localStorage.setItem('skilloc_token', data.token);
+                if (data.user) localStorage.setItem('skilloc_user', JSON.stringify(data.user));
+                alert('Login successful');
+                // Redirect workers to work.html, clients to clientpro.html
+                setTimeout(()=>{
+                    if (type === 'worker') {
+                        window.location.href = 'work.html';
+                    } else {
+                        window.location.href = 'clientpro.html';
+                    }
+                }, 600);
+            }catch(err){
+                console.error(err);
+                alert(err.message || 'Login error');
+            }
+        }
+
+        // Attach to worker login form (first form in document matches worker in this layout)
+        try{
+            const workerSection = document.querySelector('.worker-section');
+            if (workerSection){
+                const wForm = workerSection.querySelector('form');
+                wForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const email = document.getElementById('worker-email').value.trim();
+                    const password = document.getElementById('worker-password').value;
+                    doLogin('worker', email, password);
+                });
+            }
+        }catch(e){console.warn(e)}
+
+        // Attach to client login form
+        try{
+            const clientSection = document.querySelector('.client-section');
+            if (clientSection){
+                const cForm = clientSection.querySelector('form');
+                cForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const email = document.getElementById('client-email').value.trim();
+                    const password = document.getElementById('client-password').value;
+                    const service = document.getElementById('client-service').value || '';
+                    const location = document.getElementById('client-location').value.trim() || '';
+                    // store preferences for clientpro page
+                    localStorage.setItem('skilloc_client_service', service);
+                    localStorage.setItem('skilloc_client_location', location);
+                    doLogin('client', email, password);
+                });
+            }
+        }catch(e){console.warn(e)}
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Registration - Skilloc</title>
+    <link rel="stylesheet" href="worker.css">
+    <style>
+        .registration-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(245, 250, 240, 0.95);
+            border: 2px solid #2e7d32;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(46, 125, 50, 0.2);
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .registration-header h1 {
+            font-size: 2em;
+            color: #1b5e20;
+            margin-bottom: 10px;
+        }
+
+        .registration-header p {
+            color: #2e7d32;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #000000;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            background: #ffffff;
+            border: 2px solid #81c784;
+            border-radius: 8px;
+            color: #000000;
+            font-size: 0.95em;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888888;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1b5e20;
+            box-shadow: 0 0 15px rgba(27, 94, 32, 0.3);
+            background: #f1f8f4;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #2e7d32;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            color: #000000;
+        }
+
+        .btn-register {
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(46, 125, 50, 0.4);
+            margin-top: 20px;
+        }
+
+        .btn-register:hover {
+            background: linear-gradient(135deg, #1b5e20, #1b5e20);
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(46, 125, 50, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-register:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #1b5e20;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: #2e7d32;
+            text-shadow: 0 0 10px rgba(46, 125, 50, 0.4);
+        }
+
+        .form-divider {
+            border: none;
+            border-top: 2px solid #81c784;
+            margin: 20px 0;
+            opacity: 0.5;
+        }
+
+        h3 {
+            color: #1b5e20 !important;
+        }
+
+        @media (max-width: 768px) {
+            .registration-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .registration-header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>SKILLOC</h1>
+            <p>Find Skilled Local Professionals in Your Region</p>
+        </header>
+
+        <!-- Registration Container -->
+        <div class="registration-container">
+            <div class="registration-header">
+                <h1>Worker Registration</h1>
+                <p>Join our network and offer your skills to local clients</p>
+            </div>
+
+            <form class="registration-form" onsubmit="handleRegistration(event)">
+                
+                <!-- Personal Information Section -->
+                <div>
+                    <h3 style="margin-bottom: 15px;">Personal Information</h3>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="firstName" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="lastName" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Location Information Section -->
+                <div>
+                    <h3 style="margin-bottom: 15px;">Location Information</h3>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="address">Street Address</label>
+                        <input type="text" id="address" name="address" placeholder="Enter your street address" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Enter your city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postal-code">Postal Code</label>
+                        <input type="text" id="postal-code" name="postalCode" placeholder="Enter postal code" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">State/Province</label>
+                        <input type="text" id="state" name="state" placeholder="Enter state/province" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" placeholder="Enter country" required>
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Professional Information Section -->
+                <div>
+                    <h3 style="margin-bottom: 15px;">Professional Information</h3>
+                </div>
+
+                <div class="form-group full">
+                    <label for="profession">Primary Profession</label>
+                    <select id="profession" name="profession" required>
+                        <option value="">-- Select your profession --</option>
+                        <option value="electrician">Electrician</option>
+                        <option value="plumber">Plumber</option>
+                        <option value="mechanic">Mechanic</option>
+                        <option value="carpenter">Carpenter</option>
+                        <option value="painter">Painter</option>
+                        <option value="cleaner">Cleaning Services</option>
+                        <option value="hvac">HVAC Technician</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label for="experience">Years of Experience</label>
+                    <input type="number" id="experience" name="experience" placeholder="Enter years of experience" min="0" max="70" required>
+                </div>
+
+                <div class="form-group full">
+                    <label for="skills">Key Skills</label>
+                    <textarea id="skills" name="skills" placeholder="Describe your key skills and expertise (e.g., Electrical wiring, Circuit repair, Light installation)..." required></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label for="certifications">Certifications & Licenses</label>
+                    <textarea id="certifications" name="certifications" placeholder="List any relevant certifications, licenses, or qualifications..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hourly-rate">Hourly Rate (in your currency)</label>
+                        <input type="number" id="hourly-rate" name="hourlyRate" placeholder="Enter your hourly rate" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-radius">Service Area Radius (km)</label>
+                        <input type="number" id="service-radius" name="serviceRadius" placeholder="e.g., 5, 10, 25" min="1" max="100" required>
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Portfolio Section -->
+                <div>
+                    <h3 style="margin-bottom: 15px;">Portfolio & References</h3>
+                </div>
+
+                <div class="form-group full">
+                    <label for="portfolio">Portfolio URL (Optional)</label>
+                    <input type="url" id="portfolio" name="portfolio" placeholder="Link to your portfolio or website (if available)">
+                </div>
+
+                <div class="form-group full">
+                    <label for="references">References (Optional)</label>
+                    <textarea id="references" name="references" placeholder="Provide contact details of references or previous clients..."></textarea>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Account Security Section -->
+                <div>
+                    <h3 style="margin-bottom: 15px;">Account Security</h3>
+                </div>
+
+                <div class="form-group full">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                </div>
+
+                <div class="form-group full">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Preferences -->
+                <div style="margin-top: 20px;">
+                    <label style="color: #000000; font-weight: 600; display: block; margin-bottom: 10px;">Preferences</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="notifications" name="notifications" checked>
+                            <label for="notifications">Receive email notifications for job requests</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sms" name="sms">
+                            <label for="sms">Receive SMS job alerts</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="profile-public" name="profilePublic" checked>
+                            <label for="profile-public">Make my profile visible to clients</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the Terms and Conditions</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-register">Complete Registration</button>
+            </form>
+
+            <!-- Back Link -->
+            <div class="back-link">
+                <p style="color: #000000;">Already have an account? <a href="dash.html">Login here</a></p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Skilloc - Hyperlocal Marketplace. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        async function handleRegistration(event) {
+            event.preventDefault();
+
+            // Get form values
+            const firstName = document.getElementById('first-name').value.trim();
+            const lastName = document.getElementById('last-name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const profession = document.getElementById('profession').value;
+            const experience = Number(document.getElementById('experience').value) || 0;
+            const skills = document.getElementById('skills').value.trim();
+            const certifications = document.getElementById('certifications').value.trim();
+            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || null;
+            const serviceRadius = parseFloat(document.getElementById('service-radius').value) || null;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Basic validation
+            if (!firstName || !email || !profession) {
+                alert('Please fill in the required fields.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match. Please try again.');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                return;
+            }
+
+            if (hourlyRate !== null && hourlyRate < 0) {
+                alert('Hourly rate must be a positive number.');
+                return;
+            }
+
+            const payload = {
+                firstName,
+                lastName,
+                email,
+                phone,
+                profession,
+                experience,
+                skills,
+                certifications,
+                hourlyRate,
+                serviceRadius,
+                password
+            };
+
+            try {
+                const res = await fetch('/api/worker/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Registration failed');
+                alert('Registration successful! Redirecting to login...');
+                setTimeout(() => window.location.href = 'dash.html', 1200);
+            } catch (err) {
+                console.error(err);
+                alert(err.message || 'Registration error');
+            }
+        }
+    </script>
+</body>
+</html>

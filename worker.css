@@ -1,0 +1,324 @@
+/* Worker Registration Page Styling */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f1f8e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+    color: #000000;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Light Green Background Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(56, 142, 60, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(27, 94, 32, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 0%, rgba(102, 187, 106, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styling */
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(56, 142, 60, 0.15) 0%, rgba(27, 94, 32, 0.15) 100%);
+    border: 3px solid #2e7d32;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+    animation: glow-green 3s ease-in-out infinite;
+}
+
+.header h1 {
+    font-size: 3em;
+    color: #1b5e20;
+    text-shadow: 0 2px 4px rgba(27, 94, 32, 0.1);
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+    font-weight: 900;
+}
+
+.header p {
+    font-size: 1.2em;
+    color: #000000;
+    text-shadow: 0 1px 3px rgba(27, 94, 32, 0.1);
+}
+
+@keyframes glow-green {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+    }
+    50% {
+        box-shadow: 0 6px 25px rgba(46, 125, 50, 0.4);
+    }
+}
+
+/* Registration Container */
+.registration-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 248, 233, 0.9) 100%);
+    border: 3px solid #2e7d32;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(46, 125, 50, 0.15);
+    transition: all 0.3s ease;
+}
+
+.registration-container:hover {
+    box-shadow: 0 12px 40px rgba(46, 125, 50, 0.25);
+    transform: translateY(-2px);
+}
+
+.registration-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.registration-header h1 {
+    font-size: 2em;
+    color: #1b5e20;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(27, 94, 32, 0.1);
+}
+
+.registration-header p {
+    color: #2e7d32;
+    font-size: 0.95em;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-row.full {
+    grid-template-columns: 1fr;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #000000;
+    font-weight: 600;
+    font-size: 0.95em;
+    text-shadow: 0 1px 2px rgba(27, 94, 32, 0.05);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 15px;
+    background: #ffffff;
+    border: 2px solid #a5d6a7;
+    border-radius: 8px;
+    color: #000000;
+    font-size: 0.95em;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #666666;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #1b5e20;
+    box-shadow: 0 0 12px rgba(27, 94, 32, 0.3);
+    background: #f8fdf5;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #2e7d32;
+}
+
+.checkbox-item label {
+    margin: 0;
+    cursor: pointer;
+    color: #000000;
+}
+
+.btn-register {
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+    margin-top: 20px;
+}
+
+.btn-register:hover {
+    background: linear-gradient(135deg, #1b5e20, #1b5e20);
+    color: #ffffff;
+    box-shadow: 0 6px 25px rgba(46, 125, 50, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-register:active {
+    transform: translateY(0);
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link p {
+    color: #000000;
+}
+
+.back-link a {
+    color: #1b5e20;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.back-link a:hover {
+    color: #2e7d32;
+    text-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
+    text-decoration: underline;
+}
+
+.form-divider {
+    border: none;
+    border-top: 2px solid #a5d6a7;
+    margin: 20px 0;
+    opacity: 0.6;
+}
+
+/* Section Headers in Form */
+h3 {
+    font-size: 1.1em !important;
+    font-weight: 700 !important;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    color: #1b5e20;
+    border-top: 3px solid #2e7d32;
+    text-shadow: 0 1px 2px rgba(27, 94, 32, 0.05);
+    font-weight: 600;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(241, 248, 233, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #1b5e20, #1b5e20);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .registration-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .registration-header h1 {
+        font-size: 1.5em;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .header p {
+        font-size: 1em;
+    }
+}
+
+/* Print Styling */
+@media print {
+    body::before {
+        display: none;
+    }
+
+    .header,
+    .footer {
+        border: 1px solid #2e7d32;
+    }
+}

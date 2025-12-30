@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Worker Dashboard - Skilloc</title>
+  <link rel="stylesheet" href="work.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Worker Dashboard</h1>
+      <p id="status">Loading profile...</p>
+    </header>
+
+    <section class="card" id="profileCard">
+      <h2 id="name">—</h2>
+      <p><strong>Profession:</strong> <span id="profession">—</span></p>
+      <p><strong>Email:</strong> <span id="email">—</span></p>
+      <p><strong>Phone:</strong> <span id="phone">—</span></p>
+      <p><strong>Last Login:</strong> <span id="lastLogin">—</span></p>
+      <div style="margin-top:12px">
+        <button id="btnLogout">Logout</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    async function loadProfile(){
+      const token = localStorage.getItem('skilloc_token');
+      if (!token) {
+        alert('Not authenticated. Redirecting to login.');
+        window.location.href = 'dash.html';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/me', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || 'Failed to fetch profile');
+        }
+        const user = data.user || {};
+        document.getElementById('status').textContent = 'Welcome back!';
+        document.getElementById('name').textContent = (user.firstName || '') + ' ' + (user.lastName || '');
+        document.getElementById('profession').textContent = user.profession || '-';
+        document.getElementById('email').textContent = user.email || '-';
+        document.getElementById('phone').textContent = user.phone || '-';
+        // Attempt to read lastLogin from worker.db is optional; server /api/me returns user info
+        document.getElementById('lastLogin').textContent = new Date().toLocaleString();
+      } catch (err) {
+        console.error(err);
+        alert(err.message || 'Error loading profile');
+        localStorage.removeItem('skilloc_token');
+        window.location.href = 'dash.html';
+      }
+    }
+
+    document.getElementById('btnLogout').addEventListener('click', function(){
+      localStorage.removeItem('skilloc_token');
+      localStorage.removeItem('skilloc_user');
+      window.location.href = 'dash.html';
+    });
+
+    loadProfile();
+  </script>
+</body>
+</html>

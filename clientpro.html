@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Client - Nearby Professionals</title>
+  <link rel="stylesheet" href="clientpro.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Nearby Professionals</h1>
+      <p class="small">Showing results for: <strong id="serviceName">-</strong></p>
+    </header>
+
+    <section class="card">
+      <div id="controls">
+        <button id="btnFind" class="btn">Find Nearby</button>
+        <span style="margin-left:12px" class="small" id="locStatus">Waiting for action</span>
+      </div>
+
+      <div class="results" id="results"></div>
+    </section>
+  </div>
+
+  <script>
+    function showResults(workers){
+      const out = document.getElementById('results');
+      out.innerHTML = '';
+      if (!workers || workers.length===0){
+        out.innerHTML = '<div class="worker-item">No workers found nearby.</div>';
+        return;
+      }
+      workers.forEach(w=>{
+        const div = document.createElement('div');
+        div.className = 'worker-item';
+        div.innerHTML = `<strong>${w.firstName} ${w.lastName || ''}</strong> <div class="small">${(w.profession||'')} — ${w.email || ''}</div><div style="margin-top:8px"><a target="_blank" href="https://www.google.com/maps?q=${w.latitude},${w.longitude}">Open on Map</a></div>`;
+        out.appendChild(div);
+      });
+    }
+
+    async function findNearby(category){
+      const status = document.getElementById('locStatus');
+      if (!navigator.geolocation){
+        status.textContent = 'Geolocation not supported';
+        return;
+      }
+      status.textContent = 'Requesting location...';
+        navigator.geolocation.getCurrentPosition(async pos=>{
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        status.textContent = 'Searching nearby...';
+        try{
+          // prefer authenticated client search endpoint when token is available
+          const token = localStorage.getItem('skilloc_token');
+          const headers = { 'Content-Type':'application/json' };
+          if (token) headers['Authorization'] = 'Bearer ' + token;
+          const res = await fetch('/api/client/search',{ method:'POST', headers, body: JSON.stringify({ category, lat, lng }) });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Server error');
+          showResults(data.workers || []);
+          status.textContent = `${(data.workers||[]).length} result(s)`;
+        }catch(err){
+          console.error(err);
+          status.textContent = err.message || 'Error';
+        }
+      }, err=>{
+        status.textContent = 'Location denied or unavailable';
+      }, { enableHighAccuracy:false, timeout:10000, maximumAge:30000 });
+    }
+
+    document.getElementById('btnFind').addEventListener('click', ()=>{
+      const cat = localStorage.getItem('skilloc_client_service') || 'electrician';
+      document.getElementById('serviceName').textContent = cat;
+      findNearby(cat);
+    });
+
+    // Auto-run if service exists
+    (function(){
+      const cat = localStorage.getItem('skilloc_client_service');
+      if (cat){
+        document.getElementById('serviceName').textContent = cat;
+        findNearby(cat);
+      }
+    })();
+  </script>
+</body>
+</html>

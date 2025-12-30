@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Registration - Skilloc</title>
+    <link rel="stylesheet" href="client.css">
+    <style>
+        .registration-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(20, 20, 40, 0.9);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .registration-header h1 {
+            font-size: 2em;
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .registration-header p {
+            color: #b0b0ff;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            background: rgba(30, 30, 60, 0.8);
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.95em;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888888;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff00ff;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+            background: rgba(40, 40, 70, 0.9);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #00ffff;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .btn-register {
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #00ffff, #00ccff);
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            margin-top: 20px;
+        }
+
+        .btn-register:hover {
+            background: linear-gradient(135deg, #ff00ff, #ff00ff);
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .btn-register:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+        }
+
+        .form-divider {
+            border: none;
+            border-top: 2px solid #ff00ff;
+            margin: 20px 0;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .registration-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .registration-header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>SKILLOC</h1>
+            <p>Find Skilled Local Professionals in Your Region</p>
+        </header>
+
+        <!-- Registration Container -->
+        <div class="registration-container">
+            <div class="registration-header">
+                <h1>Client Registration</h1>
+                <p>Create your account and start finding skilled professionals near you</p>
+            </div>
+
+            <form class="registration-form" onsubmit="handleRegistration(event)">
+                
+                <!-- Personal Information Section -->
+                <div>
+                    <h3 style="color: #00ffff; margin-bottom: 15px; text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">Personal Information</h3>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="firstName" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="lastName" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Location Information Section -->
+                <div>
+                    <h3 style="color: #ff00ff; margin-bottom: 15px; text-shadow: 0 0 5px rgba(255, 0, 255, 0.3);">Location Information</h3>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="address">Street Address</label>
+                        <input type="text" id="address" name="address" placeholder="Enter your street address" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Enter your city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postal-code">Postal Code</label>
+                        <input type="text" id="postal-code" name="postalCode" placeholder="Enter postal code" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">State/Province</label>
+                        <input type="text" id="state" name="state" placeholder="Enter state/province" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" placeholder="Enter country" required>
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Service Preferences Section -->
+                <div>
+                    <h3 style="color: #00ffff; margin-bottom: 15px; text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">Service Preferences</h3>
+                </div>
+
+                <div class="form-group full">
+                    <label for="services">Services You're Looking For</label>
+                    <select id="services" name="services" multiple required>
+                        <option value="">-- Select services --</option>
+                        <option value="electrical">Electrical Work</option>
+                        <option value="plumbing">Plumbing</option>
+                        <option value="automotive">Automotive Repair</option>
+                        <option value="carpentry">Carpentry</option>
+                        <option value="painting">Painting</option>
+                        <option value="cleaning">Cleaning Services</option>
+                        <option value="hvac">HVAC Services</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label for="radius">Service Area Radius (km)</label>
+                    <input type="number" id="radius" name="radius" placeholder="Enter preferred service radius (e.g., 5)" min="1" max="100" required>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Account Security Section -->
+                <div>
+                    <h3 style="color: #ff00ff; margin-bottom: 15px; text-shadow: 0 0 5px rgba(255, 0, 255, 0.3);">Account Security</h3>
+                </div>
+
+                <div class="form-group full">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                </div>
+
+                <div class="form-group full">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+
+                <hr class="form-divider">
+
+                <!-- Additional Information -->
+                <div>
+                    <h3 style="color: #00ffff; margin-bottom: 15px; text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);">Additional Information</h3>
+                </div>
+
+                <div class="form-group full">
+                    <label for="bio">About You (Optional)</label>
+                    <textarea id="bio" name="bio" placeholder="Tell us a bit about yourself and your service requirements..."></textarea>
+                </div>
+
+                <!-- Preferences -->
+                <div style="margin-top: 20px;">
+                    <label style="color: #ffffff; font-weight: 600; display: block; margin-bottom: 10px;">Preferences</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="notifications" name="notifications" checked>
+                            <label for="notifications">Receive email notifications for matching professionals</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sms" name="sms">
+                            <label for="sms">Receive SMS updates</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the Terms and Conditions</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-register">Complete Registration</button>
+            </form>
+
+            <!-- Back Link -->
+            <div class="back-link">
+                <p>Already have an account? <a href="dash.html">Login here</a></p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Skilloc - Hyperlocal Marketplace. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        async function handleRegistration(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById('first-name').value.trim();
+            const lastName = document.getElementById('last-name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const radius = parseFloat(document.getElementById('radius').value) || null;
+            const servicesEl = document.getElementById('services');
+            const services = Array.from(servicesEl.selectedOptions).map(o=>o.value).filter(Boolean);
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (!firstName || !email) {
+                alert('Please fill in the required fields.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                return;
+            }
+
+            const payload = {
+                firstName,
+                lastName,
+                email,
+                phone,
+                address,
+                city,
+                services,
+                radius,
+                password
+            };
+
+            try {
+                const res = await fetch('/api/client/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Registration failed');
+                alert('Registration successful! Redirecting to login...');
+                setTimeout(()=> window.location.href = 'dash.html', 1000);
+            } catch (err) {
+                console.error(err);
+                alert(err.message || 'Registration error');
+            }
+        }
+    </script>
+</body>
+</html>

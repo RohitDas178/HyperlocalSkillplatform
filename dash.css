@@ -1,0 +1,384 @@
+/* Skilloc Dashboard Styling */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f0f2e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Neon Background Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 0%, rgba(0, 200, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styling */
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #00ffff, #ff00ff) 1;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.2);
+    animation: glow 3s ease-in-out infinite;
+}
+
+.header h1 {
+    font-size: 3em;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+    font-weight: 900;
+}
+
+.header p {
+    font-size: 1.2em;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3);
+    }
+}
+
+/* Main Content */
+.main-content {
+    width: 100%;
+}
+
+/* Login Container */
+.login-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Login Section Styling */
+.login-section {
+    background: rgba(20, 20, 40, 0.8);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.login-section:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.2);
+    border-color: #ff00ff;
+}
+
+.worker-section {
+    border-color: #00ffff;
+}
+
+.worker-section:hover {
+    border-color: #ff00ff;
+}
+
+.client-section {
+    border-color: #ff00ff;
+}
+
+.client-section:hover {
+    border-color: #00ffff;
+}
+
+.section-title {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.section-title h2 {
+    font-size: 1.8em;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #00ffff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+.section-title p {
+    color: #b0b0ff;
+    font-size: 0.95em;
+}
+
+/* Form Styling */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95em;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 15px;
+    background: rgba(30, 30, 60, 0.8);
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+}
+
+.form-group input::placeholder {
+    color: #888888;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #ff00ff;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+    background: rgba(40, 40, 70, 0.9);
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group select option {
+    background: #1a1a3e;
+    color: #ffffff;
+}
+
+/* Button Styling */
+.btn-login {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #00ffff, #00ccff);
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #ff00ff, #ff00ff);
+    color: #ffffff;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.7);
+    transform: translateY(-2px);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* Signup Link */
+.signup-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #b0b0ff;
+    font-size: 0.9em;
+}
+
+.signup-link a {
+    color: #00ffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #ff00ff;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+}
+
+/* Services Section */
+.services-section {
+    margin-top: 50px;
+    padding: 40px 20px;
+    background: rgba(20, 20, 40, 0.6);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.services-section h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #00ffff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.service-card {
+    background: rgba(30, 30, 60, 0.8);
+    border: 2px solid #ff00ff;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    border-color: #00ffff;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4), 0 0 60px rgba(255, 0, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+}
+
+.service-card h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.service-card p {
+    color: #b0b0ff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.btn-browse {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff00ff, #ff0080);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+}
+
+.btn-browse:hover {
+    background: linear-gradient(135deg, #00ffff, #00ccff);
+    color: #000000;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    color: #888888;
+    border-top: 2px solid #00ffff;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .login-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .header p {
+        font-size: 1em;
+    }
+
+    .section-title h2 {
+        font-size: 1.4em;
+    }
+
+    .login-section {
+        padding: 20px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-section h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(20, 20, 40, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #00ffff, #ff00ff);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #ff00ff, #00ffff);
+}
