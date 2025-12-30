@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skilloc - Chat with Workers</title>
+    <link rel="stylesheet" href="chatbox.css">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="header-content">
+                <h1>Skilloc Chat</h1>
+                <button id="backBtn" class="back-btn">← Back</button>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="chat-main">
+            <!-- Worker List Panel -->
+            <div class="worker-list-panel">
+                <div class="panel-header">
+                    <h2>Available Workers</h2>
+                    <div class="search-box">
+                        <input type="text" id="searchWorkers" placeholder="Search workers...">
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="electrician">Electrician</option>
+                            <option value="plumber">Plumber</option>
+                            <option value="mechanic">Mechanic</option>
+                            <option value="carpenter">Carpenter</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="worker-list" id="workerList">
+                    <p class="loading">Loading workers...</p>
+                </div>
+            </div>
+
+            <!-- Chat Window -->
+            <div class="chat-window">
+                <div class="no-chat-selected" id="noChatSelected">
+                    <div class="empty-state">
+                        <div class="empty-icon">💬</div>
+                        <h3>No Chat Selected</h3>
+                        <p>Select a worker from the list to start chatting</p>
+                    </div>
+                </div>
+
+                <div class="chat-active" id="chatActive" style="display: none;">
+                    <!-- Chat Header -->
+                    <div class="chat-window-header">
+                        <div class="worker-info">
+                            <div class="worker-avatar">
+                                <span id="workerInitials">?</span>
+                            </div>
+                            <div>
+                                <h3 id="selectedWorkerName">Worker Name</h3>
+                                <p id="selectedWorkerProfession">Profession</p>
+                                <span id="onlineStatus" class="online-badge">Online</span>
+                            </div>
+                        </div>
+                        <button id="closeChat" class="close-chat-btn">✕</button>
+                    </div>
+
+                    <!-- Messages Display -->
+                    <div class="messages-container" id="messagesContainer">
+                        <div class="messages-empty">No messages yet. Start the conversation!</div>
+                    </div>
+
+                    <!-- Message Input -->
+                    <div class="message-input-area">
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="messageInput" 
+                                placeholder="Type your message..." 
+                                autocomplete="off"
+                            >
+                            <button id="sendBtn" class="send-btn">Send</button>
+                        </div>
+                        <small id="typingIndicator" class="typing-indicator" style="display: none;">
+                            <span id="typingWorkerName"></span> is typing...
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div id="errorToast" class="toast error-toast" style="display: none;"></div>
+    <!-- Success Toast -->
+    <div id="successToast" class="toast success-toast" style="display: none;"></div>
+
+    <script src="public/js/chat.js"></script>
+</body>
+</html>
